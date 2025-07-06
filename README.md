@@ -1,212 +1,167 @@
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Flutter](https://img.shields.io/badge/Flutter-3.0+-blue.svg)
-![Django](https://img.shields.io/badge/Django-4.0+-green.svg)
+🌐 Borderless‑API
+Borderless‑API is a backend service for a mobile‑first social platform with user authentication, blog post CRUD operations, comments, and real‑time chat via WebSockets.
+Built with Django, Django REST Framework, and Django Channels, it provides both RESTful API endpoints and WebSocket integration for seamless communication.
 
-# Borderless-api
+🚀 Setup Instructions
+📋 Requirements
+Python 3.8+
 
-# Blog & Real-Time Messaging API
+pip (comes with Python)
 
-A Django-based web application with a backend and frontend, featuring blog posting, real-time messaging, friend management, and user interactions.
+virtualenv (optional but recommended)
 
-## Table of Contents
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Setup Instructions](#setup-instructions)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Running the Project](#running-the-project)
-- [Usage](#usage)
-- [API Endpoints](#api-endpoints)
-- [Goals](#goals)
-- [Contributing](#contributing)
-- [License](#license)
+A database: defaults to SQLite (can use PostgreSQL with proper config)
 
-## Features
-- **Blog Posts**: Users can create, edit, and delete blog posts.
-- **Real-Time Messaging**: Chat with friends in real-time using WebSockets.
-- **Friend System**: Find and add friends, view friend lists.
-- **User Authentication**: Register, log in, and log out securely.
-- **Responsive Frontend**: User-friendly interface for all functionalities.
-- **Frontend**: [Flutter App Repository](https://github.com/jacekong/Borderless.git)
+Redis (for channel layers, if scaling WebSockets)
 
-## Tech Stack
-- **Backend**: Django (Python), Django REST Framework
-- **Frontend**: HTML, CSS, JavaScript (optional: React/Vue if used)
-- **Database**: SQLite (default) / PostgreSQL (recommended for production)
-- **Real-Time**: Django Channels (WebSockets)
-- **Version Control**: Git
+🔧 Installation Steps
+1️⃣ Clone this repository:
+bash
+Copy
+Edit
+git clone https://github.com/<your-username>/Borderless-api.git
+cd Borderless-api
+2️⃣ Create and activate virtual environment:
+bash
+Copy
+Edit
+python -m venv venv
+source venv/bin/activate    # On Linux/Mac
+venv\Scripts\activate       # On Windows
+3️⃣ Install dependencies:
+bash
+Copy
+Edit
+pip install -r requirements.txt
+4️⃣ Configure environment variables:
+Copy .env.example to .env and set your secret keys, DB connection (if not using SQLite), and Redis URL if needed.
+Example:
 
-## Project Structure
-```bash
-borderlessApi/
-|---- api/ # App for blog post management
-    |---- tempaltetags/
-        |---- __init__.py
-        |---- custom_filters.py
-    |---- admin.py
-    |---- apps.py
-    |---- consumers.py
-    |---- models.py
-    |---- routing.py
-    |---- serializers.py
-    |---- tests.py
-    |---- urls.py
-    |---- views.py
-|---- borderlessApi/ 
-    |---- __init__.py
-    |---- asgi.py
-    |---- settings.py
-    |---- urls.py
-    |---- wsgi.py
-|---- chat/ # App for realtime messaging
-    |---- __init__.py
-    |---- apps.py
-    |---- channel_middleware.py
-    |---- consumers.py
-    |---- routing.py
-    |---- models.py
-    |---- serializers.py
-    |---- signals.py
-    |---- tests.py
-    |---- token_authenication.py
-    |---- urls.py
-    |---- views.py
-|---- friend/ # App for friend management
-    |---- __init__.py
-    |---- admin.py
-    |---- apps.py
-    |---- models.py
-    |---- serializers.py
-    |---- tests.py
-    |---- urls.py
-    |---- views.py
-|---- static/ # Static files
-|---- templates/ # Base tempaltes
-|---- users/ # App for user management
-    |---- __init__.py
-    |---- admin.py
-    |---- apps.py
-    |---- models.py
-    |---- serializers.py
-    |---- signals.py
-    |---- tests.py
-    |---- urls.py
-    |---- views.py
-```
-
-## Setup Instructions
-
-### Prerequisites
-- Python 3.8+
-- Git
-- Virtualenv (recommended)
-- Redis (for Django Channels in production)
-- Django-channels (Realtime messaging)
-
-### Installation
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/jacekong/Borderless-api.git
-   cd borderlessApi
-
-2. **Create a Virtual Environment:**
-    ```bash
-    python -m venv venv
-    source venv/bin/activate
-    ```
-
-3. **Install Dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-4. **Set Up Environment Variables: Create a .env file in the project root and add:**
-    ```bash
-    BASE_URL=
-    SECRET_KEY=your-secret-key
-    DEBUG=True
-    DATABASE_URL=sqlite:///db.sqlite3 
-    REDIS_URL=redis://localhost:6379/1
-    <!-- Google login -->
-    CLIENT_ID=
-    CLIENT_SECRET=
-    <!-- Send email -->
-    EMAIL_HOST=
-    EMAIL_PORT=
-    EMAIL_HOST_PASSWORD=
-    ```
-
-5. **Apply Migrations:**
-    ```bash
-    python manage.py makemigrations
-    python manage.py migrate
-    ```
-
-6. **python manage.py createsuperuser:**
-    ```bash
-    python manage.py createsuperuser
-    ```
-
-## Running the Project
-```bash
+ini
+Copy
+Edit
+DJANGO_SECRET_KEY=your_secret_key_here
+DB_NAME=borderless
+DB_USER=user
+DB_PASS=password
+DB_HOST=localhost
+DB_PORT=5432
+REDIS_URL=redis://127.0.0.1:6379
+5️⃣ Apply migrations:
+bash
+Copy
+Edit
+python manage.py migrate
+6️⃣ Create a superuser (optional, for admin access):
+bash
+Copy
+Edit
+python manage.py createsuperuser
+🗂 Folder Structure
+bash
+Copy
+Edit
+Borderless-api/
+├── borderless/           # Django project folder
+│   ├── asgi.py           # ASGI entry point (for WebSockets)
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── users/                # User auth app
+├── posts/                # Blog posts & comments app
+├── chat/                 # WebSocket chat app
+├── requirements.txt
+├── manage.py
+└── README.md
+🖥️ How to Run the Project
+🔷 Run development server:
+bash
+Copy
+Edit
 python manage.py runserver
-```
+✅ API available at: http://127.0.0.1:8000/api/
+✅ Admin panel at: http://127.0.0.1:8000/admin/
 
-## Usage
-- Blog Posts: Log in, navigate to the "Posts" section, and create a new post.
-- Messaging: Go to the "Messages" tab, select a friend, and start chatting.
-- Friends: Use the "Find Friends" feature to search and send friend requests.
+🔷 Start Channels worker for WebSockets:
+For real‑time chat, you’ll also need to run:
 
-## API Endpoints
-**Posts**
-- GET /api/posts/ - List all posts.
-- GET /api/posts/<str:pk> - Get single post
-- GET api/public/posts/ - Get all public post
-- GET api/posts/login/user - Get login user's post
-- GET api/check/user/posts/<str:user_id> - Get specific user's posts
-- POST /api/posts/ - Create a new post.
-- POST api/post/comments/<str:pk> - Comment on a post
-- DELETE /api/posts/<str:pk> - DELETE single post
+bash
+Copy
+Edit
+daphne borderless.asgi:application
+🔷 Sample API output:
+json
+Copy
+Edit
+{
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGci...",
+  "user": {
+    "id": 1,
+    "username": "john_doe"
+  }
+}
+✅ WebSocket endpoint: ws://127.0.0.1:8000/ws/chat/<room_name>/
 
-**Real-Time Messaging**
-- GET /api/chat/history/<str:user_id>/ - Get chat history with current user
-- GET /api/chat/history/images/<str:user_id>/ - Get Iamge chat history with current user
-- GET /api/chat/history/voice/<str:user_id>/ -Get Audio chat history with current user
-- GET /api/chatlists/ - Get all chat lists
-- GET /api/notification/ - Send chat notification
-- POST /api/chatlist/create/ - Create new chat
-- POST /api/chat/images/ - Send iamge in chat
+📸 Screenshots
+Login Screen	Chat Room
 
-**Websocket**
-- ws/chat/<str:user_id>/ - Chat with user
-- ws/notifications/ - Reveive notifications
+🧩 Key Functions / Components
+1️⃣ JWT Authentication Endpoint
+File: users/views.py → TokenObtainPairView
 
-**Friend**
-- POST /send/friend/request/ - Send fiend request
-- POST /accept/friend/request/ - Accept fiend request
-- POST /decline/friend/request/ - Refuse fiend request
-- POST /cancel/friend/request/ - Cancel fiend sending request
-- POST /remove/friend/ - Unfriend
-- GET /api/user/friends/ - Get all friends
-- GET /api/user/friend/request/ - Get all friends' request
+Role: Issues JWT tokens to authenticated users.
 
-**Users**
-- POST /user/register/ - Register new user
-- POST /user/update/ - Update user profile
-- GET /current/user/ - GET current login user
-- GET /api/users/search/ - Search user
+Inputs:
+Request body (JSON):
 
-## Goals
-1. Complete web frontend integration
-2. Extend backend features
+json
+Copy
+Edit
+{ "username": "john_doe", "password": "password123" }
+Output:
+JWT access and refresh tokens + user info.
 
-## Contributing
-- Fork the repository.
-- Create a new branch (git checkout -b feature-branch).
-- Commit your changes (git commit -m "Add feature").
-- Push to the branch (git push origin feature-branch).
-- Open a pull request.
+Edge cases:
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Wrong credentials → HTTP 401 error
+
+Inactive user → HTTP 403 error
+
+2️⃣ Chat Consumer
+File: chat/consumers.py → ChatConsumer
+
+Role: Handles WebSocket connections for chat rooms.
+
+Inputs:
+WebSocket events: connect, receive message, disconnect
+
+Output:
+Broadcasts received messages to all users in the same room.
+
+Edge cases:
+
+User leaves → room is cleaned up
+
+Message too large → connection closed
+
+🩹 Troubleshooting Tips
+✅ Issue: django.core.exceptions.ImproperlyConfigured: SECRET_KEY not set
+💡 Check your .env file and export it before running.
+
+✅ Issue: WebSocket connections failing
+💡 Ensure you’re running daphne or have proper ASGI server configured.
+
+✅ Issue: Database errors (e.g. no such table)
+💡 Run python manage.py migrate to create tables.
+
+✅ Issue: Static files not loading in dev
+💡 Run python manage.py collectstatic and check STATIC_URL.
+
+✅ Helpful tip:
+If using Redis, ensure it’s running on default port 6379 or update REDIS_URL.
+
+🤝 Contributing
+Feel free to submit pull requests to improve documentation, add features, or fix bugs.
+
+📜 License
+MIT License — see LICENSE.

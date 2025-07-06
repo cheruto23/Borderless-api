@@ -4,40 +4,23 @@ Built with Django, Django REST Framework, and Django Channels, it provides both 
 
 📑 Table of Contents
 ✅ Setup Instructions
-
 📋 Requirements
-
 🔧 Installation Steps
-
 🗂 Folder Structure
-
 ✅ How to Run the Project
-
 ✅ Key Functions / Components
-
 ✅ Troubleshooting Tips
-
 ✅ Contributing
-
 ✅ License
-
 ✅ Setup Instructions
 📋 Requirements
 Python 3.8+
-
 pip (comes with Python)
-
 virtualenv (optional but recommended)
-
 A database: defaults to SQLite (can use PostgreSQL with proper config)
-
 Redis (for channel layers, if scaling WebSockets)
-
 🔧 Installation Steps
 1️⃣ Clone this repository
-bash
-Copy
-Edit
 git clone https://github.com/cheruto23/Borderless-api.git
 cd Borderless-api
 2️⃣ Create and activate virtual environment

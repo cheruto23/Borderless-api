@@ -5,6 +5,19 @@ Built with **Django**, **Django REST Framework**, and **Django Channels**, it pr
 
 ---
 
+## 📑 Table of Contents
+- [✅ Setup Instructions](#-setup-instructions)
+  - [📋 Requirements](#-requirements)
+  - [🔧 Installation Steps](#-installation-steps)
+  - [🗂 Folder Structure](#-folder-structure)
+- [✅ How to Run the Project](#-how-to-run-the-project)
+- [✅ Key Functions / Components](#-key-functions--components)
+- [✅ Troubleshooting Tips](#-troubleshooting-tips)
+- [✅ Contributing](#-contributing)
+- [✅ License](#-license)
+
+---
+
 # ✅ Setup Instructions
 
 ## 📋 Requirements
@@ -16,26 +29,23 @@ Built with **Django**, **Django REST Framework**, and **Django Channels**, it pr
 
 ## 🔧 Installation Steps
 
-### 1 Clone this repository
-
+### 1️⃣ Clone this repository
+```bash
 git clone https://github.com/cheruto23/Borderless-api.git
 cd Borderless-api
-
-### 2 Create and activate virtual environment
+2️⃣ Create and activate virtual environment
 bash
 Copy
 Edit
 python -m venv venv
 source venv/bin/activate    # On Linux/Mac
 venv\Scripts\activate       # On Windows
-
-### 3 Install dependencies
+3️⃣ Install dependencies
 bash
 Copy
 Edit
 pip install -r requirements.txt
-
-### 4 Configure environment variables
+4️⃣ Configure environment variables
 Copy .env.example to .env and set your secret keys, DB connection (if not using SQLite), and Redis URL if needed.
 
 Example:
@@ -50,17 +60,20 @@ DB_PASS=password
 DB_HOST=localhost
 DB_PORT=5432
 REDIS_URL=redis://127.0.0.1:6379
-
-### 5 Apply migrations
+5️⃣ Apply migrations
 bash
 Copy
 Edit
 python manage.py migrate
-
-### 6 Create a superuser (optional, for admin access)
+6️⃣ Create a superuser (optional, for admin access)
+bash
+Copy
+Edit
 python manage.py createsuperuser
 🗂 Folder Structure
-
+plaintext
+Copy
+Edit
 Borderless-api/
 ├── borderless/           # Django project folder
 │   ├── asgi.py           # ASGI entry point (for WebSockets)
@@ -73,16 +86,21 @@ Borderless-api/
 ├── requirements.txt
 ├── manage.py
 └── README.md
-
-
 ✅ How to Run the Project
 🔷 Run development server
+bash
+Copy
+Edit
 python manage.py runserver
 ✅ API available at: http://127.0.0.1:8000/api/
 ✅ Admin panel at: http://127.0.0.1:8000/admin/
 
 🔷 Start Channels worker for WebSockets
-For real‑time chat, you’ll also need to run:
+For real‑time chat, also run:
+
+bash
+Copy
+Edit
 daphne borderless.asgi:application
 🔷 Sample API output
 json
@@ -95,33 +113,42 @@ Edit
     "username": "john_doe"
   }
 }
-✅ WebSocket endpoint: ws://127.0.0.1:8000/ws/chat/<room_name>/
+✅ WebSocket endpoint:
+ws://127.0.0.1:8000/ws/chat/<room_name>/
 
 ✅ Key Functions / Components
-### 1 JWT Authentication Endpoint
+1️⃣ JWT Authentication Endpoint
 File: users/views.py → TokenObtainPairView
+
 Role: Issues JWT tokens to authenticated users.
 
-Inputs:
-Request body (JSON):
+Inputs: Request body (JSON):
+
+json
+Copy
+Edit
 { "username": "john_doe", "password": "password123" }
-Output:
-JWT access and refresh tokens + user info.
+Output: JWT access and refresh tokens + user info.
 
 Edge cases:
+
 Wrong credentials → HTTP 401 error
+
 Inactive user → HTTP 403 error
 
-### 2 Chat Consumer
+2️⃣ Chat Consumer
 File: chat/consumers.py → ChatConsumer
+
 Role: Handles WebSocket connections for chat rooms.
-Inputs:
-WebSocket events: connect, receive message, disconnect
-Output:
-Broadcasts received messages to all users in the same room.
+
+Inputs: WebSocket events: connect, receive message, disconnect
+
+Output: Broadcasts received messages to all users in the same room.
 
 Edge cases:
+
 User leaves → room is cleaned up
+
 Message too large → connection closed
 
 ✅ Troubleshooting Tips
@@ -144,4 +171,4 @@ If using Redis, ensure it’s running on default port 6379 or update REDIS_URL.
 Feel free to submit pull requests to improve documentation, add features, or fix bugs.
 
 ✅ License
-MIT License — see LICENSE.
+MIT License — see LICENSE

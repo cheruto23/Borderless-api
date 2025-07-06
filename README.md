@@ -1,4 +1,3 @@
-```markdown
 # 🌐 Borderless‑API
 
 Borderless‑API is a backend service for a mobile‑first social platform with user authentication, blog post CRUD operations, comments, and real‑time chat via WebSockets.  
@@ -17,24 +16,26 @@ Built with **Django**, **Django REST Framework**, and **Django Channels**, it pr
 
 ## 🔧 Installation Steps
 
-### 1️⃣ Clone this repository
-```bash
+### 1 Clone this repository
+
 git clone https://github.com/cheruto23/Borderless-api.git
 cd Borderless-api
 
-2️⃣ Create and activate virtual environment
+### 2 Create and activate virtual environment
 bash
 Copy
 Edit
 python -m venv venv
 source venv/bin/activate    # On Linux/Mac
 venv\Scripts\activate       # On Windows
-3️⃣ Install dependencies
+
+### 3 Install dependencies
 bash
 Copy
 Edit
 pip install -r requirements.txt
-4️⃣ Configure environment variables
+
+### 4 Configure environment variables
 Copy .env.example to .env and set your secret keys, DB connection (if not using SQLite), and Redis URL if needed.
 
 Example:
@@ -49,20 +50,17 @@ DB_PASS=password
 DB_HOST=localhost
 DB_PORT=5432
 REDIS_URL=redis://127.0.0.1:6379
-5️⃣ Apply migrations
+
+### 5 Apply migrations
 bash
 Copy
 Edit
 python manage.py migrate
-6️⃣ Create a superuser (optional, for admin access)
-bash
-Copy
-Edit
+
+### 6 Create a superuser (optional, for admin access)
 python manage.py createsuperuser
 🗂 Folder Structure
-bash
-Copy
-Edit
+
 Borderless-api/
 ├── borderless/           # Django project folder
 │   ├── asgi.py           # ASGI entry point (for WebSockets)
@@ -75,21 +73,15 @@ Borderless-api/
 ├── requirements.txt
 ├── manage.py
 └── README.md
+
 ✅ How to Run the Project
 🔷 Run development server
-bash
-Copy
-Edit
 python manage.py runserver
 ✅ API available at: http://127.0.0.1:8000/api/
 ✅ Admin panel at: http://127.0.0.1:8000/admin/
 
 🔷 Start Channels worker for WebSockets
 For real‑time chat, you’ll also need to run:
-
-bash
-Copy
-Edit
 daphne borderless.asgi:application
 🔷 Sample API output
 json
@@ -104,46 +96,31 @@ Edit
 }
 ✅ WebSocket endpoint: ws://127.0.0.1:8000/ws/chat/<room_name>/
 
-📸 Screenshots
-Login Screen	Chat Room
-
 ✅ Key Functions / Components
-1️⃣ JWT Authentication Endpoint
+### 1 JWT Authentication Endpoint
 File: users/views.py → TokenObtainPairView
-
 Role: Issues JWT tokens to authenticated users.
 
 Inputs:
 Request body (JSON):
-
-json
-Copy
-Edit
 { "username": "john_doe", "password": "password123" }
 Output:
 JWT access and refresh tokens + user info.
 
 Edge cases:
-
 Wrong credentials → HTTP 401 error
-
 Inactive user → HTTP 403 error
 
-2️⃣ Chat Consumer
+### 2 Chat Consumer
 File: chat/consumers.py → ChatConsumer
-
 Role: Handles WebSocket connections for chat rooms.
-
 Inputs:
 WebSocket events: connect, receive message, disconnect
-
 Output:
 Broadcasts received messages to all users in the same room.
 
 Edge cases:
-
 User leaves → room is cleaned up
-
 Message too large → connection closed
 
 ✅ Troubleshooting Tips

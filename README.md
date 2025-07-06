@@ -1,28 +1,39 @@
-Borderless‑API
-Borderless‑API is a backend service for a mobile‑first social platform with user authentication, blog post CRUD operations, comments, and real‑time chat via WebSockets.
-Built with Django, Django REST Framework, and Django Channels, it provides both RESTful API endpoints and WebSocket integration for seamless communication.
+```markdown
+# 🌐 Borderless‑API
 
-📑 Table of Contents
-✅ Setup Instructions
-📋 Requirements
-🔧 Installation Steps
-🗂 Folder Structure
-✅ How to Run the Project
-✅ Key Functions / Components
-✅ Troubleshooting Tips
-✅ Contributing
-✅ License
-✅ Setup Instructions
-📋 Requirements
-Python 3.8+
-pip (comes with Python)
-virtualenv (optional but recommended)
-A database: defaults to SQLite (can use PostgreSQL with proper config)
-Redis (for channel layers, if scaling WebSockets)
-🔧 Installation Steps
-1️⃣ Clone this repository
+Borderless‑API is a backend service for a mobile‑first social platform with user authentication, blog post CRUD operations, comments, and real‑time chat via WebSockets.  
+Built with **Django**, **Django REST Framework**, and **Django Channels**, it provides both RESTful API endpoints and WebSocket integration for seamless communication.
+
+---
+
+## 📑 Table of Contents
+- [✅ Setup Instructions](#-setup-instructions)
+  - [📋 Requirements](#-requirements)
+  - [🔧 Installation Steps](#-installation-steps)
+  - [🗂 Folder Structure](#-folder-structure)
+- [✅ How to Run the Project](#-how-to-run-the-project)
+- [✅ Key Functions / Components](#-key-functions--components)
+- [✅ Troubleshooting Tips](#-troubleshooting-tips)
+- [✅ Contributing](#-contributing)
+- [✅ License](#-license)
+
+---
+
+# ✅ Setup Instructions
+
+## 📋 Requirements
+- [Python](https://www.python.org/) 3.8+
+- [pip](https://pip.pypa.io/) (comes with Python)
+- [virtualenv](https://virtualenv.pypa.io/) (optional but recommended)
+- A database: defaults to SQLite (can use PostgreSQL with proper config)
+- Redis (for channel layers, if scaling WebSockets)
+
+## 🔧 Installation Steps
+
+### 1️⃣ Clone this repository
+```bash
 git clone https://github.com/cheruto23/Borderless-api.git
-cd Borderless-api
+cd Borderless-api 
 2️⃣ Create and activate virtual environment
 bash
 Copy

@@ -61,7 +61,18 @@ python manage.py migrate
 python manage.py createsuperuser
 🗂 Folder Structure
 
-<pre> ```bash Borderless-api/ ├── borderless/ # Django project folder │ ├── asgi.py # ASGI entry point (for WebSockets) │ ├── settings.py │ ├── urls.py │ └── wsgi.py ├── users/ # User auth app ├── posts/ # Blog posts & comments app ├── chat/ # WebSocket chat app ├── requirements.txt ├── manage.py └── README.md ``` </pre>
+Borderless-api/
+├── borderless/ # Django project folder
+│ ├── asgi.py # ASGI entry point (for WebSockets)
+│ ├── settings.py
+│ ├── urls.py
+│ └── wsgi.py
+├── users/ # User auth app
+├── posts/ # Blog posts & comments app
+├── chat/ # WebSocket chat app
+├── requirements.txt
+├── manage.py
+└── README.md
 
 ✅ How to Run the Project
 🔷 Run development server
